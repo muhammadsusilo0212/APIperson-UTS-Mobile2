@@ -1,0 +1,32 @@
+<resources>
+
+    <!-- Nama aplikasi -->
+    <string name="app_name">APIPersonUTS</string>
+
+    <!-- Judul Tab -->
+    <string name="tab_text_1">Person</string>
+    <string name="tab_text_2">Profile</string>
+
+    <!-- Judul halaman -->
+    <string name="title_person">Daftar Person</string>
+    <string name="title_profile">Profile Developer</string>
+
+    <!-- Label data person -->
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="birthday">Birthday</string>
+    <string name="gender">Gender</string>
+    <string name="website">Website</string>
+
+    <!-- Detail address -->
+    <string name="address">Address</string>
+    <string name="street">Street</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+
+    <!-- Image -->
+    <string name="image_person">Image Person</string>
+
+</resources>
