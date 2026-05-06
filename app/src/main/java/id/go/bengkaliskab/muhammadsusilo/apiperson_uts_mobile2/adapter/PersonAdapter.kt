@@ -1,10 +1,12 @@
 package id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.helpers.Config
 
 // glide image
 import com.bumptech.glide.Glide
@@ -58,10 +60,35 @@ class PersonAdapter :
             // phone
             binding.txtPhone.text = person.phone
 
-            // load image dengan Glide
-            Glide.with(binding.root.context)
-                .load(person.image)
-                .into(binding.imgPerson)
+            // url image dari API
+            val url = person.image
+
+            // cek url di logcat
+            Log.d("IMAGE_URL", url)
+
+            fun bind(person: DataItem) {
+
+                // nama lengkap
+                binding.txtName.text =
+                    "${person.firstname} ${person.lastname}"
+
+                // email
+                binding.txtEmail.text = person.email
+
+                // phone
+                binding.txtPhone.text = person.phone
+
+                // url image
+                val url = Config.IMAGE_URL
+
+                // load image dengan Glide
+                    Glide.with(itemView.context)
+                    .load(url)
+                    .placeholder(android.R.drawable.ic_menu_gallery)
+                    .error(android.R.drawable.stat_notify_error)
+                    .centerCrop()
+                    .into(binding.imgPerson)
+            }
         }
     }
 

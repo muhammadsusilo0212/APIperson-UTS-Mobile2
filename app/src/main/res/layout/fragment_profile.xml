@@ -17,7 +17,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
 
-        android:text="Nama: Muhammad Susilo&#10;Profesi: Teknisi Komputer"
+        android:text="Nama: Muhammad Susilo&#10;Profesi: Operator"
         android:textSize="16sp" />
 
 </FrameLayout>

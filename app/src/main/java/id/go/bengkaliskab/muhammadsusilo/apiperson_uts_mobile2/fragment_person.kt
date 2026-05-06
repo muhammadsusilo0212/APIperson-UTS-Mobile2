@@ -52,6 +52,11 @@ class fragment_person : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //refres
+        binding.swipeRefresh.setOnRefreshListener {
+
+            getPersonList()
+        }
         // layout recycler view
         val layoutManager = LinearLayoutManager(requireContext())
 
@@ -126,16 +131,19 @@ class fragment_person : Fragment() {
     // loading progressbar
     private fun showLoading(isLoading: Boolean) {
 
-        if (isLoading) {
+        // tampilkan progressbar hanya jika bukan swipe refresh
+        if (!binding.swipeRefresh.isRefreshing) {
 
-            binding.progressBar.visibility = View.VISIBLE
+            binding.progressBar.visibility =
+                if (isLoading) View.VISIBLE else View.GONE
+        }
 
-        } else {
+        // matikan swipe refresh saat selesai loading
+        if (!isLoading) {
 
-            binding.progressBar.visibility = View.GONE
+            binding.swipeRefresh.isRefreshing = false
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
 

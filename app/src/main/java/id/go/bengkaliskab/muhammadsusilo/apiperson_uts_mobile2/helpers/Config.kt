@@ -7,5 +7,7 @@ class Config {
         // base url API fakerapi
         const val BASE_URL = "https://fakerapi.it/api/v2/"
 
+        // url avatar image
+        const val IMAGE_URL = "https://i.pravatar.cc/300"
     }
 }
