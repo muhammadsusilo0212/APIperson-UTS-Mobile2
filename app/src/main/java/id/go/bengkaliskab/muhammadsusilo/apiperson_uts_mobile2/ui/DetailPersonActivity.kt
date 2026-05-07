@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.databinding.ActivityDetailPersonBinding
 import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.ui.ViewLocationActivity
 
+
 class DetailPersonActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailPersonBinding
@@ -52,9 +53,12 @@ class DetailPersonActivity : AppCompatActivity() {
 
         binding.tvZipcode.text =
             "Zipcode : $zipcode"
+
         // image
         Glide.with(this)
             .load(image)
+            .placeholder(R.drawable.ic_person_placeholder)
+            .error(R.drawable.ic_person_placeholder)
             .centerCrop()
             .into(binding.imgPerson)
 

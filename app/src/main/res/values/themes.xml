@@ -1,4 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="CircleImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">999dp</item>
+    </style>
     <!-- Base application theme. -->
     <style name="Base.Theme.APIpersonUTSMobile2" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->

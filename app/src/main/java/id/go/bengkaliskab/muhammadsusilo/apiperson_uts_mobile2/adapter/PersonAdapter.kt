@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-
+import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.R
 import com.bumptech.glide.Glide
 
 import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.databinding.PersonItemBinding
@@ -75,7 +75,9 @@ class PersonAdapter :
             // image
             Glide.with(itemView.context)
                 .load(person.image)
-                .placeholder(android.R.drawable.ic_menu_gallery)
+                .placeholder(R.drawable.ic_person_placeholder)
+                .error(R.drawable.ic_person_placeholder)
+                .centerCrop()
                 .into(binding.imgPerson)
         }
     }

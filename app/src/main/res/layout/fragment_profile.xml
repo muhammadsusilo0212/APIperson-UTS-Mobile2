@@ -1,23 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Layout halaman profile -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5">
 
-    tools:context=".ui.fragment_profile">
-
-    <!-- Text profil developer -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        <!-- FOTO PROFIL -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            app:cardCornerRadius="70dp"
+            app:cardElevation="4dp">
 
-        android:text="Nama: Muhammad Susilo&#10;Profesi: Operator"
-        android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/profil2"
+                android:scaleType="centerCrop"/>
 
-</FrameLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- NAMA -->
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Muhammad Susilo"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+
+        <!-- NIM -->
+        <TextView
+            android:id="@+id/tvNim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="NIM : 6304250087"
+            android:textSize="16sp"
+            android:textColor="#666666"/>
+
+        <!-- KELAS -->
+        <TextView
+            android:id="@+id/tvClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Kelas : RPL 2D"
+            android:textSize="16sp"
+            android:textColor="#666666"/>
+
+        <!-- JURUSAN -->
+        <TextView
+            android:id="@+id/tvJurusan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Teknik Informatika"
+            android:textSize="16sp"
+            android:textColor="#666666"/>
+
+        <!-- CARD ABOUT -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tentang Saya"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Mahasiswa Jurusan Teknik Informatika Program Studi Rekayasa Perangkat Lunak yang sedang mempelajari Android Studio, Retrofit API, RecyclerView, Glide, dan pengembangan aplikasi mobile berbasis Kotlin."
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="#444444"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>
