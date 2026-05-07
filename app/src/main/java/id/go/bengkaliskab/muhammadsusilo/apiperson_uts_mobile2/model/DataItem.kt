@@ -16,8 +16,9 @@ data class DataItem(
     @field:SerializedName("website")
     val website: String,
 
+    // nullable agar tidak crash
     @field:SerializedName("address")
-    val address: Address,
+    val address: Address?,
 
     @field:SerializedName("gender")
     val gender: String,
@@ -34,36 +35,36 @@ data class DataItem(
     @field:SerializedName("lastname")
     val lastname: String
 )
+
 data class Address(
 
     @field:SerializedName("zipcode")
-    val zipcode: String,
+    val zipcode: String?,
 
     @field:SerializedName("country")
-    val country: String,
+    val country: String?,
 
     @field:SerializedName("country_code")
-    val countryCode: String,
+    val countryCode: String?,
 
     @field:SerializedName("streetName")
-    val streetName: String,
+    val streetName: String?,
 
     @field:SerializedName("city")
-    val city: String,
+    val city: String?,
 
     @field:SerializedName("street")
-    val street: String,
+    val street: String?,
 
     @field:SerializedName("latitude")
-    val latitude: String?,
+    val latitude: Any?,
 
     @field:SerializedName("buildingNumber")
-    val buildingNumber: String,
+    val buildingNumber: String?,
 
     @field:SerializedName("id")
-    val id: Int,
+    val id: Int?,
 
     @field:SerializedName("longitude")
-    val longitude: String?
+    val longitude: Any?
 )
-

@@ -8,7 +8,6 @@ interface ApiService {
 
     // mengambil 10 data person Indonesia gender male
     @GET("persons?_quantity=10&_locale=id_ID&_gender=male")
-
     fun getListPersons(): Call<PersonResponse>
 
 }

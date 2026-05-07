@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.glidetovectoryou)
     implementation(libs.touchimageview)
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0")
+    // Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

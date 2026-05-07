@@ -1,24 +1,29 @@
 package id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.helpers.Config
 
-// glide image
 import com.bumptech.glide.Glide
 
-// binding
 import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.databinding.PersonItemBinding
-
-// model
 import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.model.DataItem
 
 class PersonAdapter :
     ListAdapter<DataItem, PersonAdapter.MyViewHolder>(DIFF_CALLBACK) {
+
+    // click callback
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: DataItem)
+    }
 
     // membuat view holder
     override fun onCreateViewHolder(
@@ -35,22 +40,29 @@ class PersonAdapter :
         return MyViewHolder(binding)
     }
 
-    // menghubungkan data ke layout item
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    // bind data ke item
+    override fun onBindViewHolder(
+        holder: MyViewHolder,
+        position: Int
+    ) {
 
         val person = getItem(position)
 
         holder.bind(person)
+
+        holder.itemView.setOnClickListener {
+            onItemClickCallback.onItemClicked(person)
+        }
     }
 
-    // class view holder
+    // view holder
     class MyViewHolder(
         val binding: PersonItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(person: DataItem) {
 
-            // nama lengkap
+            // nama
             binding.txtName.text =
                 "${person.firstname} ${person.lastname}"
 
@@ -60,35 +72,11 @@ class PersonAdapter :
             // phone
             binding.txtPhone.text = person.phone
 
-            // url image dari API
-            val url = person.image
-
-            // cek url di logcat
-            Log.d("IMAGE_URL", url)
-
-            fun bind(person: DataItem) {
-
-                // nama lengkap
-                binding.txtName.text =
-                    "${person.firstname} ${person.lastname}"
-
-                // email
-                binding.txtEmail.text = person.email
-
-                // phone
-                binding.txtPhone.text = person.phone
-
-                // url image
-                val url = Config.IMAGE_URL
-
-                // load image dengan Glide
-                    Glide.with(itemView.context)
-                    .load(url)
-                    .placeholder(android.R.drawable.ic_menu_gallery)
-                    .error(android.R.drawable.stat_notify_error)
-                    .centerCrop()
-                    .into(binding.imgPerson)
-            }
+            // image
+            Glide.with(itemView.context)
+                .load(person.image)
+                .placeholder(android.R.drawable.ic_menu_gallery)
+                .into(binding.imgPerson)
         }
     }
 
@@ -102,7 +90,7 @@ class PersonAdapter :
                     newItem: DataItem
                 ): Boolean {
 
-                    return oldItem.id == newItem.id
+                    return oldItem == newItem
                 }
 
                 override fun areContentsTheSame(

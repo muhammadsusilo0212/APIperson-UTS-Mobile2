@@ -16,19 +16,16 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- FOTO PERSON -->
         <ImageView
             android:id="@+id/imgPerson"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Foto Person"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:src="@tools:sample/avatars"/>
+            tools:src="@tools:sample/avatars" />
 
-        <!-- NAMA -->
         <TextView
             android:id="@+id/txtName"
             android:layout_width="0dp"
@@ -37,34 +34,32 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
-            app:layout_constraintStart_toEndOf="@id/imgPerson"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgPerson"
             app:layout_constraintTop_toTopOf="@id/imgPerson"
-            tools:text="Nama Person"/>
+            tools:text="Nama Person" />
 
-        <!-- EMAIL -->
         <TextView
             android:id="@+id/txtEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@id/txtName"
             app:layout_constraintEnd_toEndOf="@id/txtName"
+            app:layout_constraintStart_toStartOf="@id/txtName"
             app:layout_constraintTop_toBottomOf="@id/txtName"
-            tools:text="email@gmail.com"/>
+            tools:text="email@gmail.com" />
 
-        <!-- PHONE -->
         <TextView
             android:id="@+id/txtPhone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@id/txtName"
             app:layout_constraintEnd_toEndOf="@id/txtName"
+            app:layout_constraintStart_toStartOf="@id/txtName"
             app:layout_constraintTop_toBottomOf="@id/txtEmail"
-            tools:text="+628xxxx"/>
+            tools:text="+628xxxx" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

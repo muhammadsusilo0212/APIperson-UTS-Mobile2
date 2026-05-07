@@ -1,5 +1,6 @@
 package id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,19 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 
-// adapter
 import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.adapter.PersonAdapter
-
-// binding
 import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.databinding.FragmentPersonBinding
-
-// model
 import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.model.DataItem
-
-// response
 import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.response.PersonResponse
-
-// retrofit
 import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.retrofit.ApiConfig
 
 import retrofit2.Call
@@ -44,106 +36,214 @@ class fragment_person : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentPersonBinding.inflate(inflater, container, false)
+        _binding = FragmentPersonBinding.inflate(
+            inflater,
+            container,
+            false
+        )
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
-        //refres
+        // swipe refresh
         binding.swipeRefresh.setOnRefreshListener {
 
             getPersonList()
         }
-        // layout recycler view
-        val layoutManager = LinearLayoutManager(requireContext())
 
-        binding.rvPerson.layoutManager = layoutManager
+        // recycler view
+        val layoutManager =
+            LinearLayoutManager(requireContext())
 
-        val itemDecoration = DividerItemDecoration(
-            requireContext(),
-            layoutManager.orientation
+        binding.rvPerson.layoutManager =
+            layoutManager
+
+        val itemDecoration =
+            DividerItemDecoration(
+                requireContext(),
+                layoutManager.orientation
+            )
+
+        binding.rvPerson.addItemDecoration(
+            itemDecoration
         )
-
-        binding.rvPerson.addItemDecoration(itemDecoration)
 
         // ambil data API
         getPersonList()
     }
 
-    // mengambil data retrofit
+    // retrofit API
     private fun getPersonList() {
 
         showLoading(true)
 
-        val client = ApiConfig
-            .getApiService()
-            .getListPersons()
+        val client =
+            ApiConfig
+                .getApiService()
+                .getListPersons()
 
-        client.enqueue(object : Callback<PersonResponse> {
+        client.enqueue(
+            object : Callback<PersonResponse> {
 
-            override fun onResponse(
-                call: Call<PersonResponse>,
-                response: Response<PersonResponse>
-            ) {
+                override fun onResponse(
+                    call: Call<PersonResponse>,
+                    response: Response<PersonResponse>
+                ) {
 
-                showLoading(false)
+                    showLoading(false)
 
-                if (response.isSuccessful) {
+                    if (response.isSuccessful) {
 
-                    val responseBody = response.body()
+                        val responseBody =
+                            response.body()
 
-                    if (responseBody != null) {
+                        if (responseBody != null) {
 
-                        setPersonData(responseBody.data)
+                            setPersonData(
+                                responseBody.data
+                            )
+                        }
+
+                    } else {
+
+                        Log.e(
+                            TAG,
+                            "onFailure: ${response.message()}"
+                        )
                     }
+                }
 
-                } else {
+                override fun onFailure(
+                    call: Call<PersonResponse>,
+                    t: Throwable
+                ) {
 
-                    Log.e(TAG, "onFailure: ${response.message()}")
+                    showLoading(false)
+
+                    Log.e(
+                        TAG,
+                        "onFailure: ${t.message}"
+                    )
                 }
             }
-
-            override fun onFailure(
-                call: Call<PersonResponse>,
-                t: Throwable
-            ) {
-
-                showLoading(false)
-
-                Log.e(TAG, "onFailure: ${t.message}")
-            }
-        })
+        )
     }
 
-    // set data ke recycler view
-    private fun setPersonData(person: List<DataItem>) {
+    // set data recycler view
+    private fun setPersonData(
+        person: List<DataItem>
+    ) {
 
         val adapter = PersonAdapter()
 
         adapter.submitList(person)
 
         binding.rvPerson.adapter = adapter
+
+        adapter.setOnItemClickCallback(
+            object : PersonAdapter.OnItemClickCallback {
+
+                override fun onItemClicked(
+                    data: DataItem
+                ) {
+
+                    val moveIntent =
+                        Intent(
+                            requireActivity(),
+                            DetailPersonActivity::class.java
+                        )
+
+                    // person
+                    moveIntent.putExtra(
+                        "firstname",
+                        data.firstname
+                    )
+
+                    moveIntent.putExtra(
+                        "lastname",
+                        data.lastname
+                    )
+
+                    moveIntent.putExtra(
+                        "email",
+                        data.email
+                    )
+
+                    moveIntent.putExtra(
+                        "phone",
+                        data.phone
+                    )
+
+                    moveIntent.putExtra(
+                        "image",
+                        data.image
+                    )
+
+                    // address
+                    moveIntent.putExtra(
+                        "street",
+                        data.address?.street ?: "-"
+                    )
+
+                    moveIntent.putExtra(
+                        "city",
+                        data.address?.city ?: "-"
+                    )
+
+                    moveIntent.putExtra(
+                        "country",
+                        data.address?.country ?: "-"
+                    )
+
+                    moveIntent.putExtra(
+                        "zipcode",
+                        data.address?.zipcode ?: "-"
+                    )
+
+                    // latitude longitude
+                    moveIntent.putExtra(
+                        "latitude",
+                        data.address?.latitude.toString()
+                    )
+
+                    moveIntent.putExtra(
+                        "longitude",
+                        data.address?.longitude.toString()
+                    )
+
+                    startActivity(moveIntent)
+                }
+            }
+        )
     }
 
-    // loading progressbar
-    private fun showLoading(isLoading: Boolean) {
+    // loading
+    private fun showLoading(
+        isLoading: Boolean
+    ) {
 
-        // tampilkan progressbar hanya jika bukan swipe refresh
         if (!binding.swipeRefresh.isRefreshing) {
 
             binding.progressBar.visibility =
-                if (isLoading) View.VISIBLE else View.GONE
+                if (isLoading)
+                    View.VISIBLE
+                else
+                    View.GONE
         }
 
-        // matikan swipe refresh saat selesai loading
         if (!isLoading) {
 
-            binding.swipeRefresh.isRefreshing = false
+            binding.swipeRefresh.isRefreshing =
+                false
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
 
