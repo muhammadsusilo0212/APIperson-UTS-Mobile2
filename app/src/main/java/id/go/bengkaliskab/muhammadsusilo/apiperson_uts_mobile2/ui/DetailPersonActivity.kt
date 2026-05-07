@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.databinding.ActivityDetailPersonBinding
+import id.go.bengkaliskab.muhammadsusilo.apiperson_uts_mobile2.ui.ViewLocationActivity
 
 class DetailPersonActivity : AppCompatActivity() {
 
