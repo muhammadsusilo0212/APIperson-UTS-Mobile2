@@ -63,6 +63,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Zipcode"/>
+        <TextView
+            android:id="@+id/tvGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender"
+            />
         <Button
             android:id="@+id/btnViewLocation"
             android:layout_width="wrap_content"

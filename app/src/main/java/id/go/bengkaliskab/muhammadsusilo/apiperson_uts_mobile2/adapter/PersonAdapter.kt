@@ -72,9 +72,13 @@ class PersonAdapter :
             // phone
             binding.txtPhone.text = person.phone
 
+            //Gander
+            binding.txtGender.text =
+                "Gender : ${person.gender}"
+
             // image
             Glide.with(itemView.context)
-                .load(person.image)
+                .load("https://api.dicebear.com/7.x/adventurer/png?seed=${person.firstname}")
                 .placeholder(R.drawable.ic_person_placeholder)
                 .error(R.drawable.ic_person_placeholder)
                 .centerCrop()

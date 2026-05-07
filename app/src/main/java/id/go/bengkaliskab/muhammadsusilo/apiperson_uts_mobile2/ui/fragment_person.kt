@@ -216,6 +216,10 @@ class fragment_person : Fragment() {
                         "longitude",
                         data.address?.longitude.toString()
                     )
+                    moveIntent.putExtra(
+                        "gender",
+                        data.gender
+                    )
 
                     startActivity(moveIntent)
                 }

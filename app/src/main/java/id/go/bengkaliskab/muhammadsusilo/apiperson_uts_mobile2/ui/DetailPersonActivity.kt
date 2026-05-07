@@ -31,6 +31,7 @@ class DetailPersonActivity : AppCompatActivity() {
         val city = intent.getStringExtra("city")
         val country = intent.getStringExtra("country")
         val zipcode = intent.getStringExtra("zipcode")
+        val gender = intent.getStringExtra("gender")
         // latitude longitude
         val latitude = intent.getStringExtra("latitude")
         val longitude = intent.getStringExtra("longitude")
@@ -51,12 +52,15 @@ class DetailPersonActivity : AppCompatActivity() {
         binding.tvCountry.text =
             "Country : $country"
 
+        binding.tvGender.text =
+            "Gender : $gender"
+
         binding.tvZipcode.text =
             "Zipcode : $zipcode"
 
         // image
         Glide.with(this)
-            .load(image)
+            .load("https://api.dicebear.com/7.x/adventurer/png?seed=$firstname")
             .placeholder(R.drawable.ic_person_placeholder)
             .error(R.drawable.ic_person_placeholder)
             .centerCrop()
